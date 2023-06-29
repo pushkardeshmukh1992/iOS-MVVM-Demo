@@ -31,7 +31,9 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        guard let result = facilityViewModel.result else { return 0 }
+        
+        return result.facilities.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -56,13 +58,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let result = facilityViewModel.result else { return 0 }
+        
+        return result.facilities[section].options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let result = facilityViewModel.result else { return UITableViewCell() }
+        
+        let option = result.facilities[indexPath.section].options[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCellType", for: indexPath)
         
-        cell.textLabel!.text = "Title text"
+        cell.textLabel!.text = "\(option.name)"
         
         return cell
     }
