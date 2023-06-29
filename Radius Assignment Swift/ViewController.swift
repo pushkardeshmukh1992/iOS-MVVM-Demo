@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         setupLayout()
         
         facilityViewModel.getFacilities { [weak self] response in
+            print(response)
             self?.tableView.reloadData()
         }
     }
@@ -25,6 +26,8 @@ class ViewController: UIViewController {
     private func setupLayout() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "FacilityOptionTableViewCell", bundle: nil), forCellReuseIdentifier: "FacilityOptionTableViewCell")
+        
     }
 }
 
@@ -68,9 +71,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let option = result.facilities[indexPath.section].options[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCellType", for: indexPath)
-        
-        cell.textLabel!.text = "\(option.name)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FacilityOptionTableViewCell", for: indexPath) as? FacilityOptionTableViewCell else { return UITableViewCell() }
+        cell.optionButton.setTitle("\(option.name)", for: .normal)
         
         return cell
     }
