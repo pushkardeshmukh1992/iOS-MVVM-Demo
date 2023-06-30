@@ -29,4 +29,7 @@ class FacilityOptionTableViewCell: UITableViewCell {
         optionButton.setImage(.init(named: "check-box"), for: .selected)
     }
     
+    @IBAction func handleOptionButtonTap(_ sender: Any) {
+        optionButton.isSelected = !optionButton.isSelected
+    }
 }
