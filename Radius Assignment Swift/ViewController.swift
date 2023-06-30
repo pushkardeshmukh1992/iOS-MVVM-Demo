@@ -17,8 +17,8 @@ class ViewController: UIViewController {
         
         setupLayout()
         
-        facilityViewModel.getFacilities { [weak self] response in
-            print(response)
+        facilityViewModel.getFacilities()
+        facilityViewModel.didChangeDataSource = { [weak self] in
             self?.tableView.reloadData()
         }
     }
@@ -69,10 +69,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let result = facilityViewModel.result else { return UITableViewCell() }
         
-        let option = result.facilities[indexPath.section].options[indexPath.row]
+        let facility = result.facilities[indexPath.section]
+        let option = facility.options[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FacilityOptionTableViewCell", for: indexPath) as? FacilityOptionTableViewCell else { return UITableViewCell() }
-        cell.optionButton.setTitle("\(option.name)", for: .normal)
+        cell.setViewModel(viewModel: facilityViewModel, option: option, facility: facility)
+        
         
         return cell
     }

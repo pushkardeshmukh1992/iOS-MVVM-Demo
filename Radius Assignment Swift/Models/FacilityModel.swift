@@ -8,13 +8,16 @@
 struct Facility: Codable {
     let facilityId: String
     let name: String?
-    let options : [FacilityOption]
+    var options : [FacilityOption]
 }
 
 struct FacilityOption: Codable {
     let id: String
     let name: String
     let icon: String?
+    
+    var disable: Bool? = false
+    var selected: Bool? = false
 }
 
 struct Exclusion: Codable {
@@ -23,7 +26,7 @@ struct Exclusion: Codable {
 }
 
 struct FacilityResponse: Codable {
-    let facilities: [Facility]
+    var facilities: [Facility]
     let exclusions: [[Exclusion]]
 }
 
