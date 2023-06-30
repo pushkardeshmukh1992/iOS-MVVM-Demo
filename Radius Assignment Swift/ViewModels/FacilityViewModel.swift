@@ -19,7 +19,7 @@ class FacilityViewModel {
     }
     
     func getFacilities() {
-        service.getFacilities { [weak self] result in
+        service.getFacilities(objectType: FacilityResponse.self) { [weak self] result in
             switch result {
             case let .success((response)):
                 self?.result = response
@@ -28,6 +28,7 @@ class FacilityViewModel {
                 print("handle error")
             }
         }
+        
     }
     
     private func optionUpdate(toUpdate option: FacilityOption, from facility: Facility) {

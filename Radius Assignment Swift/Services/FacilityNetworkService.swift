@@ -8,11 +8,11 @@
 import Foundation
 
 protocol FacilityNetworkServiceProtocol {
-    func getFacilities(completion: @escaping(Result<FacilityResponse?, Error>) -> Void)
+    func getFacilities<T:Codable>(objectType: T.Type, completion: @escaping(Result<T?, Error>) -> Void)
 }
 
 class FacilityNetworkService: FacilityNetworkServiceProtocol {
-    func getFacilities(completion: @escaping (Result<FacilityResponse?, Error>) -> Void) {
+    func getFacilities<T:Codable>(objectType: T.Type, completion: @escaping (Result<T?, Error>) -> Void) {
         guard let url = URL(string: APIConstants.APIEndPoint) else {
             completion(.failure(NSError()))
             return
@@ -24,7 +24,7 @@ class FacilityNetworkService: FacilityNetworkServiceProtocol {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
                 let (data, _) = try await URLSession.shared.data(from: url)
-                let response = try decoder.decode(FacilityResponse.self, from: data)
+                let response = try decoder.decode(objectType.self, from: data)
                 
                 DispatchQueue.main.async { [weak self] in
                     guard let _ = self else {
