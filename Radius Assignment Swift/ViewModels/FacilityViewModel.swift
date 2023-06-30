@@ -12,25 +12,20 @@ class FacilityViewModel {
     
     var didChangeDataSource: (() -> ())?
     
+    private var service: FacilityNetworkServiceProtocol
+    
+    init(service: FacilityNetworkServiceProtocol = FacilityNetworkService()) {
+        self.service = service
+    }
+    
     func getFacilities() {
-        guard let url = URL(string: APIConstants.APIEndPoint) else { return }
-        
-        Task {
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                let (data, _) = try await URLSession.shared.data(from: url)
-                let response = try decoder.decode(FacilityResponse.self, from: data)
-                
-                DispatchQueue.main.async { [weak self] in
-                    self?.result = response
-                    
-                    self?.didChangeDataSource?()
-                    
-                }
-            } catch {
-                print(error)
+        service.getFacilities { [weak self] result in
+            switch result {
+            case let .success((response)):
+                self?.result = response
+                self?.didChangeDataSource?()
+            case .failure:
+                print("handle error")
             }
         }
     }
@@ -40,19 +35,19 @@ class FacilityViewModel {
         
         self.result?.facilities = result.facilities.map { tempFacility in
             var mutableFacility = tempFacility
-
+            
             let options = tempFacility.options.map { tempOption in
                 var mutableOption = tempOption
-
+                
                 if (tempFacility.facilityId == facility.facilityId && tempOption.id == option.id) {
                     mutableOption.selected = !(mutableOption.selected ?? false)
                 }
-
+                
                 return mutableOption
             }
-
+            
             mutableFacility.options = options
-
+            
             return mutableFacility
         }
     }
@@ -70,22 +65,22 @@ class FacilityViewModel {
                     
                     let optionToBeDisabled = outerExclusion[index + 1]
                     // TODO: Search found. Now disable its mapped entry
-
+                    
                     self.result?.facilities = result.facilities.map { facility in
                         var mutableFacility = facility
-
+                        
                         let options = facility.options.map { option in
                             var mutableOption = option
-
+                            
                             if (facility.facilityId == optionToBeDisabled.facilityId && option.id == optionToBeDisabled.optionsId) {
                                 mutableOption.disable = !(mutableOption.disable ?? false)
                             }
-
+                            
                             return mutableOption
                         }
-
+                        
                         mutableFacility.options = options
-
+                        
                         return mutableFacility
                     }
                 }

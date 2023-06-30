@@ -18,6 +18,7 @@
 		849C9DF02A4DAC42004C9E10 /* FacilityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C9DEF2A4DAC42004C9E10 /* FacilityViewModel.swift */; };
 		84F0C06F2A4DF32000024518 /* FacilityOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C06D2A4DF32000024518 /* FacilityOptionTableViewCell.swift */; };
 		84F0C0702A4DF32000024518 /* FacilityOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0C06E2A4DF32000024518 /* FacilityOptionTableViewCell.xib */; };
+		84F0C0732A4F08F600024518 /* FacilityNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C0722A4F08F600024518 /* FacilityNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		849C9DEF2A4DAC42004C9E10 /* FacilityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacilityViewModel.swift; sourceTree = "<group>"; };
 		84F0C06D2A4DF32000024518 /* FacilityOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityOptionTableViewCell.swift; sourceTree = "<group>"; };
 		84F0C06E2A4DF32000024518 /* FacilityOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacilityOptionTableViewCell.xib; sourceTree = "<group>"; };
+		84F0C0722A4F08F600024518 /* FacilityNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacilityNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +68,10 @@
 		849C9DD32A4DAADC004C9E10 /* Radius Assignment Swift */ = {
 			isa = PBXGroup;
 			children = (
+				84F0C0712A4F08E400024518 /* Services */,
 				84F0C06A2A4DF2C900024518 /* Cells */,
 				849C9DEE2A4DAC42004C9E10 /* ViewModels */,
-				849C9DEB2A4DAC1F004C9E10 /* Constatns */,
+				849C9DEB2A4DAC1F004C9E10 /* Constants */,
 				849C9DE82A4DABD2004C9E10 /* Models */,
 				849C9DD42A4DAADC004C9E10 /* AppDelegate.swift */,
 				849C9DD62A4DAADC004C9E10 /* SceneDelegate.swift */,
@@ -89,12 +92,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		849C9DEB2A4DAC1F004C9E10 /* Constatns */ = {
+		849C9DEB2A4DAC1F004C9E10 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				849C9DEC2A4DAC2E004C9E10 /* APIConstants.swift */,
 			);
-			path = Constatns;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		849C9DEE2A4DAC42004C9E10 /* ViewModels */ = {
@@ -112,6 +115,14 @@
 				84F0C06E2A4DF32000024518 /* FacilityOptionTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		84F0C0712A4F08E400024518 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				84F0C0722A4F08F600024518 /* FacilityNetworkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				849C9DD52A4DAADC004C9E10 /* AppDelegate.swift in Sources */,
 				849C9DD72A4DAADC004C9E10 /* SceneDelegate.swift in Sources */,
 				849C9DF02A4DAC42004C9E10 /* FacilityViewModel.swift in Sources */,
+				84F0C0732A4F08F600024518 /* FacilityNetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
