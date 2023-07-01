@@ -32,7 +32,8 @@ class FacilityNetworkService: FacilityNetworkServiceProtocol {
                         return
                     }
                     
-                    completion(.success(response))
+                    completion(.success(FacilityResponse.example as? T))
+//                    completion(.success(response))
                 }
             } catch {
                 completion(.failure(error))
