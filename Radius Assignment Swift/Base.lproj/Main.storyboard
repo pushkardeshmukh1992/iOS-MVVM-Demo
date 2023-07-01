@@ -30,17 +30,39 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V0e-cl-Obu">
+                                <rect key="frame" x="38" y="392.66666666666669" width="317" height="66.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed to fetch data. Please try again later." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwC-Wq-tGq">
+                                        <rect key="frame" x="0.0" y="0.0" width="317" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRx-yw-Uxy">
+                                        <rect key="frame" x="126.33333333333334" y="32.333333333333314" width="64.666666666666657" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Retry"/>
+                                        <connections>
+                                            <action selector="handleRetryActionTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F2Z-CF-Whl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KPD-KO-oOc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="54t-fI-mPD"/>
+                            <constraint firstItem="V0e-cl-Obu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Rd7-lY-wPy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KPD-KO-oOc" secondAttribute="trailing" id="ZZA-Sr-JmM"/>
+                            <constraint firstItem="V0e-cl-Obu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aWW-80-9kz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KPD-KO-oOc" secondAttribute="bottom" id="jVR-zp-eq1"/>
                             <constraint firstItem="KPD-KO-oOc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qCF-BM-5SV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorStackView" destination="V0e-cl-Obu" id="KWE-Yo-wIy"/>
                         <outlet property="tableView" destination="KPD-KO-oOc" id="LAP-8Z-Et7"/>
                     </connections>
                 </viewController>

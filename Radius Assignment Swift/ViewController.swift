@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     let facilityViewModel = FacilityViewModel()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
         facilityViewModel.getFacilities()
         facilityViewModel.didChangeDataSource = { [weak self] in
             self?.tableView.reloadData()
+            self?.showErrorIfDataIsEmpty()
         }
     }
     
@@ -29,6 +31,23 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "FacilityOptionTableViewCell", bundle: nil), forCellReuseIdentifier: "FacilityOptionTableViewCell")
         
     }
+    
+    private func showErrorIfDataIsEmpty() {
+        if let result = facilityViewModel.result, result.facilities.count > 0 {
+            tableView.isHidden = false
+            errorStackView.isHidden = true
+        } else {
+            tableView.isHidden = true
+            errorStackView.isHidden = false
+        }
+    }
+    
+    // MARK: Button actions
+    
+    @IBAction func handleRetryActionTap(_ sender: Any) {
+        facilityViewModel.getFacilities()
+    }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {

@@ -9,10 +9,9 @@ import Foundation
 
 class FacilityViewModel {
     private(set) var result: FacilityResponse?
+    private let service: FacilityNetworkServiceProtocol
     
     var didChangeDataSource: (() -> ())?
-    
-    private var service: FacilityNetworkServiceProtocol
     
     init(service: FacilityNetworkServiceProtocol = FacilityNetworkService()) {
         self.service = service
