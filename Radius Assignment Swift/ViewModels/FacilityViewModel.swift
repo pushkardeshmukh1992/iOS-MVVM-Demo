@@ -67,28 +67,38 @@ class FacilityViewModel {
         for (_, outerExclusion) in result.exclusions.enumerated() {
             for (index, exclusion) in outerExclusion.enumerated() {
                 if (index == 0 && exclusion.facilityId == exclusionEntryToBeSearched.facilityId && exclusion.optionsId == exclusionEntryToBeSearched.optionsId) {
+                    var tempExlusions = outerExclusion
+                    tempExlusions.remove(at: 0)
                     
-                    let optionToBeDisabled = outerExclusion[index + 1]
-                    // TODO: Search found. Now disable its mapped entry
-                    
-                    self.result?.facilities = result.facilities.map { facility in
-                        var mutableFacility = facility
-                        
-                        let options = facility.options.map { option in
-                            var mutableOption = option
+                    for (_, exclusionToBeDisabled) in tempExlusions.enumerated() {
+                            print(exclusionToBeDisabled)
+                            // TODO: Search found. Now disable its mapped entry
                             
-                            if (facility.facilityId == optionToBeDisabled.facilityId && option.id == optionToBeDisabled.optionsId) {
-                                mutableOption.disable = !mutableOption.isDisabled
-                                mutableOption.selected = false
+                            self.result?.facilities = result.facilities.map { facility in
+                                var mutableFacility = facility
+                                
+                                let options = mutableFacility.options.map { option in
+                                    var mutableOption = option
+                                    
+                                    if (facility.facilityId == exclusionToBeDisabled.facilityId && mutableOption.id == exclusionToBeDisabled.optionsId) {
+                                        
+                                        
+                                        mutableOption.disable = !mutableOption.isDisabled
+                                        mutableOption.selected = false
+                                        print("found option to be disabled", mutableOption)
+                                    }
+                                    
+                                    return mutableOption
+                                }
+                                
+                                mutableFacility.options = options
+                                return mutableFacility
                             }
-                            
-                            return mutableOption
-                        }
                         
-                        mutableFacility.options = options
-                        
-                        return mutableFacility
                     }
+            
+                    
+                    
                 }
             }
             

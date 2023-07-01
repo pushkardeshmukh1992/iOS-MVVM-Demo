@@ -67,7 +67,9 @@ extension FacilityResponse {
                          exclusions: [
                             [
                                 Exclusion(facilityId: "1", optionsId: "4"),
-                                Exclusion(facilityId: "2", optionsId: "6")
+                                Exclusion(facilityId: "2", optionsId: "6"),
+//                                Exclusion(facilityId: "1", optionsId: "2"),
+//                                Exclusion(facilityId: "1", optionsId: "3")
                             ],
                             [
                                 Exclusion(facilityId: "1", optionsId: "3"),
@@ -76,6 +78,22 @@ extension FacilityResponse {
                             [
                                 Exclusion(facilityId: "2", optionsId: "7"),
                                 Exclusion(facilityId: "3", optionsId: "12")
+                            ],
+                            [
+                                Exclusion(facilityId: "1", optionsId: "1"),
+                                Exclusion(facilityId: "1", optionsId: "2")
+                            ],
+                            [
+                                Exclusion(facilityId: "1", optionsId: "1"),
+                                Exclusion(facilityId: "1", optionsId: "3")
+                            ],
+                            [
+                                Exclusion(facilityId: "1", optionsId: "1"),
+                                Exclusion(facilityId: "1", optionsId: "4")
+                            ],
+                            [
+                                Exclusion(facilityId: "1", optionsId: "2"),
+                                Exclusion(facilityId: "1", optionsId: "1")
                             ]
                          ])
     }
