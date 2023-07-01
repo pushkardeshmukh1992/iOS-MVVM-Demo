@@ -70,40 +70,31 @@ class FacilityViewModel {
                     var tempExlusions = outerExclusion
                     tempExlusions.remove(at: 0)
                     
-                    for (_, exclusionToBeDisabled) in tempExlusions.enumerated() {
-                            print(exclusionToBeDisabled)
-                            // TODO: Search found. Now disable its mapped entry
-                            
-                            self.result?.facilities = result.facilities.map { facility in
-                                var mutableFacility = facility
-                                
-                                let options = mutableFacility.options.map { option in
-                                    var mutableOption = option
-                                    
-                                    if (facility.facilityId == exclusionToBeDisabled.facilityId && mutableOption.id == exclusionToBeDisabled.optionsId) {
-                                        
-                                        
-                                        mutableOption.disable = !mutableOption.isDisabled
-                                        mutableOption.selected = false
-                                        print("found option to be disabled", mutableOption)
-                                    }
-                                    
-                                    return mutableOption
-                                }
-                                
-                                mutableFacility.options = options
-                                return mutableFacility
-                            }
-                        
-                    }
-            
-                    
-                    
+                    toggleOption(for: tempExlusions)
                 }
             }
-            
         }
         
         self.didChangeDataSource?()
+    }
+    
+    private func toggleOption(for exclusions: [Exclusion]) {
+        guard var result = result else { return }
+        
+        for (_, exclusionToBeToggled) in exclusions.enumerated() {
+            for(index, facility) in result.facilities.enumerated() {
+                for(optionIndex, option) in facility.options.enumerated() {
+        
+                    if (facility.facilityId == exclusionToBeToggled.facilityId && option.id == exclusionToBeToggled.optionsId) {
+                        result.facilities[index].options[optionIndex].disable = !option.isDisabled
+                        result.facilities[index].options[optionIndex].selected = false
+                    }
+                    
+                }
+            }
+        }
+        
+        self.result = result
+        
     }
 }
