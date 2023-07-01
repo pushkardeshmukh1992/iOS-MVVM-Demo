@@ -39,8 +39,8 @@ class FacilityOptionTableViewCell: UITableViewCell {
         
         optionLabel.text = "\(option.name)"
         iconImageView.image = UIImage(named: option.icon ?? "")
-        optionButton.isSelected = option.selected ?? false
-        optionButton.isEnabled = !(option.disable ?? false)
+        optionButton.isSelected = option.isSelected
+        optionButton.isEnabled = !option.isDisabled
         
     }
     

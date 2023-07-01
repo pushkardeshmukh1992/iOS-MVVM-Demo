@@ -45,7 +45,7 @@ class FacilityViewModel {
                 var mutableOption = tempOption
                 
                 if (tempFacility.facilityId == facility.facilityId && tempOption.id == option.id) {
-                    mutableOption.selected = !(mutableOption.selected ?? false)
+                    mutableOption.selected = !mutableOption.isSelected
                 }
                 
                 return mutableOption
@@ -78,7 +78,7 @@ class FacilityViewModel {
                             var mutableOption = option
                             
                             if (facility.facilityId == optionToBeDisabled.facilityId && option.id == optionToBeDisabled.optionsId) {
-                                mutableOption.disable = !(mutableOption.disable ?? false)
+                                mutableOption.disable = !mutableOption.isDisabled
                                 mutableOption.selected = false
                             }
                             

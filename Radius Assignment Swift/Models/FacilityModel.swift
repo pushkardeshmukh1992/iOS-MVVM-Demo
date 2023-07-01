@@ -22,6 +22,10 @@ struct FacilityOption: Codable {
     var isDisabled: Bool {
         return disable ?? false
     }
+    
+    var isSelected: Bool {
+        return selected ?? false
+    }
 }
 
 struct Exclusion: Codable {
