@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         }
         
         facilityViewModel.loadingFacilities = { [weak self] loading in
-            print(loading)
             if (loading) {
                 self?.activityIndicator.startAnimating()
             } else {
@@ -79,8 +78,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print(view.frame.width)
-        
         guard let result = facilityViewModel.result else { return nil }
         
         let view = UIView()
@@ -116,6 +113,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let result = facilityViewModel.result else { return }
+        let facility = result.facilities[indexPath.section]
+        let option = facility.options[indexPath.row]
+        
+        if (!option.isDisabled) {
+            facilityViewModel.addOrRemoveFacilityOption(option: option, from: facility)
+        }
+        
     }
 }
 

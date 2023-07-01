@@ -11,7 +11,10 @@ class FacilityOptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var optionButton: UIButton!
     
-//    var optionSelected: ((FacilityOption) -> ())?
+    @IBOutlet weak var iconImageView: UIImageView!
+    
+    @IBOutlet weak var optionLabel: UILabel!
+    //    var optionSelected: ((FacilityOption) -> ())?
     
     var viewModel: FacilityViewModel?
     var option: FacilityOption?
@@ -22,12 +25,6 @@ class FacilityOptionTableViewCell: UITableViewCell {
         // Initialization code
         
         setupLayout()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     // MARK: Private functions
@@ -40,7 +37,8 @@ class FacilityOptionTableViewCell: UITableViewCell {
     private func updateData() {
         guard let option = option else { return }
         
-        optionButton.setTitle("\(option.name)", for: .normal)
+        optionLabel.text = "\(option.name)"
+        iconImageView.image = UIImage(named: option.icon ?? "")
         optionButton.isSelected = option.selected ?? false
         optionButton.isEnabled = !(option.disable ?? false)
         
@@ -54,15 +52,5 @@ class FacilityOptionTableViewCell: UITableViewCell {
         self.facility = facility
         
         updateData()
-    }
-    
-    // MARK: Actions
-    
-    @IBAction func handleOptionButtonTap(_ sender: Any) {
-        guard let option = option, let facility = facility else { return }
-        
-//        optionButton.isSelected = !optionButton.isSelected
-        
-        viewModel?.addOrRemoveFacilityOption(option: option, from: facility)
     }
 }
