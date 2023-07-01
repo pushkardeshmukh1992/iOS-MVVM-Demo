@@ -13,15 +13,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var errorStackView: UIStackView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLayout()
-        
+        initViewModelObservers()
         facilityViewModel.getFacilities()
+    }
+    
+    private func initViewModelObservers() {
         facilityViewModel.didChangeDataSource = { [weak self] in
             self?.tableView.reloadData()
-            self?.showErrorIfDataIsEmpty()
+        }
+        
+        facilityViewModel.loadingFacilities = { [weak self] loading in
+            print(loading)
+            if (loading) {
+                self?.activityIndicator.startAnimating()
+            } else {
+                self?.activityIndicator.stopAnimating()
+            }
+            
+            self?.handleViewsVisibilityBasedOnLoad(loading: loading)
         }
     }
     
@@ -32,14 +46,20 @@ class ViewController: UIViewController {
         
     }
     
-    private func showErrorIfDataIsEmpty() {
-        if let result = facilityViewModel.result, result.facilities.count > 0 {
-            tableView.isHidden = false
+    private func handleViewsVisibilityBasedOnLoad(loading: Bool) {
+        if (loading) {
+            tableView.isHidden = true
             errorStackView.isHidden = true
         } else {
-            tableView.isHidden = true
-            errorStackView.isHidden = false
+            if let result = facilityViewModel.result, result.facilities.count > 0 {
+                tableView.isHidden = false
+                errorStackView.isHidden = true
+            } else {
+                tableView.isHidden = true
+                errorStackView.isHidden = false
+            }
         }
+        
     }
     
     // MARK: Button actions

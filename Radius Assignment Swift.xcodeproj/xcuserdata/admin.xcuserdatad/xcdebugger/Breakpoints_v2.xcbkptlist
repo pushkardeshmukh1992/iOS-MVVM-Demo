@@ -14,10 +14,10 @@
             filePath = "Radius Assignment Swift/ViewModels/FacilityViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "addOrRemoveFacilityOption(option:from:)"
-            landmarkType = "7">
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "Search found. Now disable its mapped entry"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

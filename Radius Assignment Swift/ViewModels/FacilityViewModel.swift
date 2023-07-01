@@ -12,12 +12,15 @@ class FacilityViewModel {
     private let service: FacilityNetworkServiceProtocol
     
     var didChangeDataSource: (() -> ())?
+    var loadingFacilities: ((Bool) -> ())?
     
     init(service: FacilityNetworkServiceProtocol = FacilityNetworkService()) {
         self.service = service
     }
     
     func getFacilities() {
+        loadingFacilities?(true)
+        
         service.getFacilities(objectType: FacilityResponse.self) { [weak self] result in
             switch result {
             case let .success((response)):
@@ -26,6 +29,8 @@ class FacilityViewModel {
             case .failure:
                 print("handle error")
             }
+            
+            self?.loadingFacilities?(false)
         }
         
     }
