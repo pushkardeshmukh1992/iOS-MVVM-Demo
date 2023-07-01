@@ -79,6 +79,7 @@ class FacilityViewModel {
                             
                             if (facility.facilityId == optionToBeDisabled.facilityId && option.id == optionToBeDisabled.optionsId) {
                                 mutableOption.disable = !(mutableOption.disable ?? false)
+                                mutableOption.selected = false
                             }
                             
                             return mutableOption
